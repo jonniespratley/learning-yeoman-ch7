@@ -1,42 +1,42 @@
-# jps-rest
+# jps.rest
 
 The best commonjs module ever.
 
 ## Getting Started
 ### On the server
-Install the module with: `npm install jps-rest`
+Install the module with: `npm install jpsrest`
 
 ```javascript
-var jps-rest = require('jps-rest');
-jps-rest.awesome(); // "awesome"
+var jpsrest = require('jpsrest');
+jpsrest.awesome(); // "awesome"
 ```
 
 ### In the browser
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/jonniespratley/jps-rest/master/dist/jps-rest.min.js
-[max]: https://raw.github.com/jonniespratley/jps-rest/master/dist/jps-rest.js
+[min]: https://raw.github.com//jpsrest/master/dist/jpsrest.min.js
+[max]: https://raw.github.com//jpsrest/master/dist/jpsrest.js
 
 In your web page:
 
-```html
-<script src="dist/jps-rest.min.js"></script>
-<script>
-awesome(); // "awesome"
-</script>
-```
 
-In your code, you can attach jps-rest's methods to any object.
+    <script src="dist/jpsrest.min.js"></script>
+    <script>
+    awesome(); // "awesome"
+    </script>
 
-```html
-<script>
-var exports = Yeoman.utils;
-</script>
-<script src="dist/jps-rest.min.js"></script>
-<script>
-Yeoman.utils.awesome(); // "awesome"
-</script>
-```
+
+In your code, you can attach jpsrest's methods to any object.
+    
+   
+    <script>
+    var exports = Yeoman.utils;
+    </script>
+    <script src="dist/jpsrest.min.js"></script>
+    <script>
+    Yeoman.utils.awesome(); // "awesome"
+    </script>
+
 
 ## Documentation
 _(Coming soon)_
@@ -54,4 +54,4 @@ _(Nothing yet)_
 
 ## License
  
- Copyright (c) 2014 Jonnie Spratley. Licensed under the MIT license.
+ Copyright (c) 2014 . Licensed under the MIT license.

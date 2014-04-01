@@ -1,20 +1,19 @@
 {
-  "name": "jps-rest",
+  "name": "jpsrest",
   "version": "0.0.0",
   "description": "The best commonjs module ever.",
   "keywords": [
     "jquery-plugin"
   ],
-  "homepage": "https://github.com/jonniespratley/jps-rest",
-  "bugs": "https://github.com/jonniespratley/jps-rest/issues",
+  "homepage": "https://github.com//jpsrest",
+  "bugs": "https://github.com//jpsrest/issues",
   "author": {
-    "name": "Jonnie Spratley",
-    "email": "jonniespratley@gmail.com",
-    "url": "http://jonniespratley.me"
+    "name": "",
+    "email": ""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonniespratley/jps-rest"
+    "url": "https://github.com//jpsrest"
   },
   "licenses": [
     {
