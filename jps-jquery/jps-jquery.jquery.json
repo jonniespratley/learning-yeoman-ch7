@@ -1,0 +1,28 @@
+{
+  "name": "jps-jquery",
+  "title": "Awesome jQuery plugin",
+  "description": "This is a jquery plugin.",
+  "version": "0.1",
+  "homepage": "https://github.com/jonniespratley/learning-yeoman-ch7/tree/master/jps-jquery",
+  "author": {
+    "name": "jonnie spratley",
+    "url": "https://github.com/jonniespratley"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonniespratley/learning-yeoman-ch7/tree/master/jps-jquery"
+  },
+  "bugs": "",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "latest"
+  },
+  "keywords": [
+    "jquery-plugin"
+  ]
+}
