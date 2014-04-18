@@ -1,14 +1,14 @@
 {
-  "name": "jpsrest",
-  "version": "0.0.0",
+  "name": "jps-rest",
+  "version": "0.0.1",
   "description": "The best commonjs module ever.",
   "keywords": [
     "jquery-plugin"
   ],
-  "homepage": "https://github.com//jpsrest",
-  "bugs": "https://github.com//jpsrest/issues",
+  "homepage": "https://github.com/jonniespratley/jpsrest",
+  "bugs": "https://github.com/jonniespratley/jpsrest/issues",
   "author": {
-    "name": "",
+    "name": "Jonnie Spratley",
     "email": ""
   },
   "repository": {
@@ -31,5 +31,9 @@
     "time-grunt": "~0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "jshint-stylish": "~0.1.3"
+  },
+  "dependencies": {
+    "socket.io": "^0.9.16",
+    "deferred": "^0.7.0"
   }
 }

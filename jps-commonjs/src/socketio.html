@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="jpsCommonjs">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Socket.io</title>
+
+
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular.min.js"></script>
+	<script type="text/javascript"
+			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-route.min.js"></script>
+	<script type="text/javascript"
+			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-resource.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+
+		var app = angular.module('jpsCommonjs', []);
+
+		app.controller('MainCtrl', function ($scope) {
+			$scope.name = 'Socket.io Tester';
+
+			$scope.App = {
+				logs: [],
+				socket: null,
+				defaults: {
+					socketServer: '',
+					debug: false,
+					input: '',
+					output: ''
+				},
+				/**
+				 * Handle initializing socket.io
+				 */
+				init: function (options) {
+					var self = this;
+					this.options = $.extend(this.defaults, options);
+					this.socket = io.connect(this.options.socketServer);
+					this.socket.on('connect', function () {
+						console.log('Connected to socket.io')
+					});
+					this.socket.on('msg', function (data) {
+						self.onMessage(data);
+					});
+
+					console.log('App.init', options);
+				},
+				/**
+				 * Handle the response from the server.
+				 */
+				onMessage: function (data) {
+					var self = this;
+					self.log(data);
+					console.log('socket.io -> sent', data);
+				},
+				/**
+				 * Handle sending a message to socket.io server.
+				 * @param data
+				 */
+				send: function (data) {
+					var self = this;
+					console.log('sent -> socket.io ', data);
+					self.socket.emit('msgEvent', data, function (response) {
+						response.from = 'server';
+						self.onMessage(response);
+					});
+				},
+
+				/**
+				 * Handle logging the messages.
+				 * @param what
+				 */
+				log: function (what) {
+					var self = this;
+					$scope.$apply(function () {
+						self.logs.push(what);
+					});
+				}
+			};
+
+			$(document).ready(function () {
+
+				$('.clear').on('click', function () {
+					$scope.App.logs = []
+				});
+
+				$('.send').on('click', function () {
+					$scope.App.send($('#input').val());
+				});
+
+
+				$scope.App.init({
+					socketServer: 'http://localhost:9090',
+					input: '#input',
+					output: '#output'
+				});
+			});
+
+			window.App = $scope.App;
+		});
+
+	</script>
+
+</head>
+<body ng-controller="MainCtrl">
+<div class="container">
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+						class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">Socket.io Tester</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">Home</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b> Input</b>
+		</div>
+		<div class="panel-body">
+			<textarea class="form-control" rows="3" name="input" id="input" ng-model="App.input"></textarea>
+
+		</div>
+		<div class="panel-footer clearfix">
+			<a class="btn pull-right btn-primary send">Send</a>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b> Output</b>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-condensed">
+					<thead>
+					<tr>
+						<th>Message</th>
+						<th>From</th>
+						<th>Date/Time</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="item in App.logs">
+						<td>{{item.message}}</td>
+						<td>{{item.from}}</td>
+						<td>{{item.datetime | date:'medium'}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel-footer clearfix">
+			<a class="btn pull-right btn-default clear">Clear</a>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

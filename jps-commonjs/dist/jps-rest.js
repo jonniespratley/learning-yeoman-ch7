@@ -1,5 +1,5 @@
-/*! jps-rest - v0.0.0 - 2014-03-31
-* https://github.com/jonniespratley/jps-rest
+/*! jps-rest - v0.0.1 - 2014-04-18
+* https://github.com/jonniespratley/jpsrest
 * Copyright (c) 2014 Jonnie Spratley; Licensed MIT */
 (function(exports) {
 
