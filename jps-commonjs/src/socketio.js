@@ -1,5 +1,5 @@
-var http = require('http'), 
-fs = require('fs');
+var http = require('http'),
+	fs = require('fs');
 
 //Simple server push implementation
 var deferred = require('deferred');
@@ -72,23 +72,23 @@ io.sockets.on('connection', function (socket) {
 			message: 'You sent ' + data
 		});
 	});
-	
-	 socket.on('set nickname', function (name) {
-        socket.set('nickname', name, function () {
-            socket.emit('ready');
-        });
-    });
 
-    socket.on('msg', function () {
-        socket.get('nickname', function (err, name) {
-            console.log('Chat message by ', name);
-        });
-    });
+	socket.on('set nickname', function (name) {
+		socket.set('nickname', name, function () {
+			socket.emit('ready');
+		});
+	});
+
+	socket.on('msg', function () {
+		socket.get('nickname', function (err, name) {
+			console.log('Chat message by ', name);
+		});
+	});
 
 
 	//Setup auto push after interval
 	var delayedSocketPush = delay(function (msg) {
-		socket.emit( 'msg', {
+		socket.emit('msg', {
 			datetime: new Date(),
 			message: msg,
 			from: 'server'
