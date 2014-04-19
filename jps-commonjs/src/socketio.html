@@ -40,7 +40,7 @@
 					this.options = $.extend(this.defaults, options);
 					this.socket = io.connect(this.options.socketServer);
 					this.socket.on('connect', function () {
-						console.log('Connected to socket.io')
+						console.log('Connected to socket.io');
 					});
 					this.socket.on('msg', function (data) {
 						self.onMessage(data);
@@ -93,7 +93,7 @@
 
 
 				$scope.App.init({
-					socketServer: 'http://localhost:9090',
+					socketServer: '/',
 					input: '#input',
 					output: '#output'
 				});
@@ -125,18 +125,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<b> Input</b>
-		</div>
-		<div class="panel-body">
+	
+		
 			<textarea class="form-control" rows="3" name="input" id="input" ng-model="App.input"></textarea>
 
-		</div>
-		<div class="panel-footer clearfix">
 			<a class="btn pull-right btn-primary send">Send</a>
-		</div>
-	</div>
+		
+	
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<b> Output</b>

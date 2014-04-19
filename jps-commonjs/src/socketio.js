@@ -1,4 +1,5 @@
-var http = require('http'), fs = require('fs');
+var http = require('http'), 
+fs = require('fs');
 
 //Simple server push implementation
 var deferred = require('deferred');
@@ -26,23 +27,24 @@ var delay = function (fn, timeout) {
 /**
  * Simple http client server
  */
-socketFile = fs.readFileSync(__dirname + '/socketio.html');
-server = http.createServer();
+var socketFile = fs.readFileSync(__dirname + '/socketio.html');
+var server = http.createServer();
 server.on('request', function (req, res) {
 	res.writeHead('200', {
 		'content-type': 'text/html'
 	});
 	return res.end(socketFile);
 });
-server.listen(9090);
+
+server.listen(process.env.PORT, process.env.IP);
 
 
 /**
  * Simple socket.io server
  * @type {*|http.Server}
  */
-io = require('socket.io').listen(server);
-clients = [];
+var io = require('socket.io').listen(server);
+var clients = [];
 
 io.sockets.on('connection', function (socket) {
 	console.log('Client connected');
@@ -70,6 +72,18 @@ io.sockets.on('connection', function (socket) {
 			message: 'You sent ' + data
 		});
 	});
+	
+	 socket.on('set nickname', function (name) {
+        socket.set('nickname', name, function () {
+            socket.emit('ready');
+        });
+    });
+
+    socket.on('msg', function () {
+        socket.get('nickname', function (err, name) {
+            console.log('Chat message by ', name);
+        });
+    });
 
 
 	//Setup auto push after interval
