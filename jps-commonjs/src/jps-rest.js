@@ -6,12 +6,12 @@
  * Licensed under the MIT license.
  */
 
-(function(exports) {
+(function (exports) {
 
-  'use strict';
+	'use strict';
 
-  exports.awesome = function() {
-    return 'awesome';
-  };
+	exports.awesome = function () {
+		return 'awesome';
+	};
 
 }(typeof exports === 'object' && exports || this));

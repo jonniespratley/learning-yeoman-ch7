@@ -36,7 +36,14 @@ server.on('request', function (req, res) {
 	return res.end(socketFile);
 });
 
-server.listen(process.env.PORT, process.env.IP);
+var host = process.env.IP | 'localhost';
+var port = process.env.PORT | 9000;
+
+server.listen(port, host);
+
+console.log('Started server at ' + host + ':' + port);
+
+
 
 
 /**
@@ -45,6 +52,29 @@ server.listen(process.env.PORT, process.env.IP);
  */
 var io = require('socket.io').listen(server);
 var clients = [];
+
+
+var Socket = {
+	clients: [],
+	messages: [],
+	debug: true,
+	connect: function(){
+
+	},
+	send: function(channel, data){
+
+	},
+	set: function(name, value){
+
+	},
+	get: function(name){
+
+	}
+};
+
+
+
+
 
 io.sockets.on('connection', function (socket) {
 	console.log('Client connected');
@@ -61,6 +91,7 @@ io.sockets.on('connection', function (socket) {
 
 	socket.emit('msg', {
 		datetime: new Date(),
+		id: socket.id,
 		message: "Welcome " + socket.id + " your the #" + clients.length + " socket."
 	});
 
@@ -68,8 +99,9 @@ io.sockets.on('connection', function (socket) {
 	socket.on('msgEvent', function (data, fn) {
 		console.log('Client message', data);
 		fn({
+			id: socket.id,
 			datetime: new Date(),
-			message: 'You sent ' + data
+			message: data
 		});
 	});
 
@@ -86,14 +118,19 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
+
+
+
+
+
 	//Setup auto push after interval
 	var delayedSocketPush = delay(function (msg) {
 		socket.emit('msg', {
 			datetime: new Date(),
 			message: msg,
-			from: 'server'
+			id: 'Server'
 		});
-	}, 2500);
+	}, 5000);
 
 
 	var resultPromise = delayedSocketPush('Here is some streaming data....');
