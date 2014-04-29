@@ -13,15 +13,13 @@ utils = require('util');
 exports.DS = (function() {
   function DS(options) {
     this.options = options;
-    utils.inherits(this, events.EventEmitter);
-    events.EventEmitter.call(this);
     return this;
   }
 
   DS.prototype.call = function() {
     var _ref, _ref1, _ref2, _ref3;
     utils.log((_ref = this.options.adapter) != null ? _ref.hasOwnProperty([arguments[0]]) : void 0, arguments[0], arguments);
-    this.emit(arguments[0], arguments);
+    this.events.emit(arguments[0], arguments);
     if ((_ref1 = this.options.adapter) != null ? _ref1.hasOwnProperty([arguments[0]]) : void 0) {
       if ((_ref2 = this.options.adapter) != null) {
         _ref2[arguments[0]].call((_ref3 = this.options.adapter) != null ? _ref3[arguments[1]] : void 0);

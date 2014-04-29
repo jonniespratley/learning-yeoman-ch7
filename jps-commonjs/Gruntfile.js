@@ -2,14 +2,14 @@
 
 module.exports = function (grunt) {
 	// Load all grunt tasks
-	require('load-grunt-tasks')(grunt);
+	require( 'load-grunt-tasks' )( grunt );
 	// Show elapsed time at the end.
-	require('time-grunt')(grunt);
+	require( 'time-grunt' )( grunt );
 
 	// Project configuration.
-	grunt.initConfig({
+	grunt.initConfig( {
 		// Metadata.
-		pkg: grunt.file.readJSON('package.json'), banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed MIT */\n',
+		pkg: grunt.file.readJSON( 'package.json' ), banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed MIT */\n',
 		// Task configuration.
 		concat: {
 			options: {
@@ -23,11 +23,13 @@ module.exports = function (grunt) {
 			}, dist: {
 				src: '<%= concat.dist.dest %>', dest: 'dist/<%= pkg.name %>.min.js'
 			},
-		}, nodeunit: {
+		},
+		nodeunit: {
 			files: ['test/**/*_test.js']
-		}, jshint: {
+		},
+		jshint: {
 			options: {
-				jshintrc: '.jshintrc', reporter: require('jshint-stylish')
+				jshintrc: '.jshintrc', reporter: require( 'jshint-stylish' )
 			}, gruntfile: {
 				src: 'Gruntfile.js'
 			}, lib: {
@@ -43,10 +45,10 @@ module.exports = function (grunt) {
 				files: '<%= jshint.gruntfile.src %>', tasks: ['jshint:gruntfile']
 			},
 			lib: {
-				files: '<%= jshint.lib.src %>', tasks: [ 'nodeunit']
+				files: '<%= jshint.lib.src %>', tasks: ['nodeunit']
 			},
 			coffee: {
-				files: 'src/**/*.coffee', tasks: [ 'coffee']
+				files: 'src/**/*.coffee', tasks: ['coffee']
 			},
 			test: {
 				files: '<%= jshint.test.src %>', tasks: ['jshint:test', 'nodeunit']
@@ -70,8 +72,8 @@ module.exports = function (grunt) {
 				]
 			}
 		}
-	});
+	} );
 
 	// Default task.
-	grunt.registerTask('default', ['coffee', 'jshint', 'nodeunit', 'concat', 'uglify']);
+	grunt.registerTask( 'default', ['coffee', 'jshint', 'nodeunit', 'concat', 'uglify'] );
 };

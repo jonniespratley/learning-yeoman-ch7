@@ -7,9 +7,9 @@ utils = require('util')
 class exports.DS
 	constructor: (@options) ->
 		#Make core inherit all of EventEmitter properties/methods
-		utils.inherits(@, events.EventEmitter)
+		#utils.inherits(@events, events.EventEmitter)
 		#//Invoke the EventEmitter
-		events.EventEmitter.call(@)
+		#events.EventEmitter.call(@)
 		return @
 
 	#Call method which will call method on extension if there
@@ -18,7 +18,7 @@ class exports.DS
 		utils.log @options.adapter?.hasOwnProperty([arguments[0]]), arguments[0], arguments
 
 		#emit
-		@emit arguments[0], arguments
+		@events.emit arguments[0], arguments
 
 		#check
 		if @options.adapter?.hasOwnProperty([arguments[0]])
@@ -32,6 +32,7 @@ class exports.DS
 		return
 
 	findOne: (col, id) ->
+		#@call('findOne', col, id)
 		"findOne #{col} #{id}"
 	findAll: (col) ->
 		"findAll #{col}"

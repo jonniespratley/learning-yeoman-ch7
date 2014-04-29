@@ -26,27 +26,21 @@ app.read({id: 1});
 app.destroy({id: 1});
 app.init();
 
+/****
+ *
+ *
+ * JPS-CMS test
+ * @type {exports.DS|*}
+ */
+var cms = require('./dist/jps-cms').cms;
 
-
-
-
-
-
-//DS Testing
-var DS = require('./dist/DS').DS;
-
-var ds = new DS({
-	adapter: 'Default',
-	host: 'localhost',
-	port: 8181
+//Create instance
+var _cms = new cms({
+	endpoint: 'http://localhost:8181',
+	adapter: 'http'
 });
 
-console.log(ds);
-
-
-ds.findOne('posts', 1);
-ds.findAll('posts');
-ds.createRecord('posts', {title: 'name'});
+_cms.read('posts', {_id:1});
 
 
 
@@ -64,16 +58,3 @@ ds.createRecord('posts', {title: 'name'});
 
 
 
-var https = require('https');
-
-https.get('https://encrypted.google.com/', function (res) {
-	console.log("statusCode: ", res.statusCode);
-	console.log("headers: ", res.headers);
-
-	res.on('data', function (d) {
-		//	process.stdout.write(d);
-	});
-
-}).on('error', function (e) {
-	console.error(e);
-});
