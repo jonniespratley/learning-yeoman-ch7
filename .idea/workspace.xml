@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60277afa-0b79-4e0f-bd75-9df1c3fe7016" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/src/DS.coffee" afterPath="$PROJECT_DIR$/jps-commonjs/src/DS.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee" afterPath="$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/jps-cms.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/jps-cms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/test/jps-cms_test.js" afterPath="$PROJECT_DIR$/jps-commonjs/test/jps-cms_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="learning-yeoman-ch7.iws" />
     <ignored path=".idea/workspace.xml" />
