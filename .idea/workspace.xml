@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="60277afa-0b79-4e0f-bd75-9df1c3fe7016" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/src/DS.coffee" afterPath="$PROJECT_DIR$/jps-commonjs/src/DS.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/DS.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/DS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/src/DSMySQLAdapter.coffee" afterPath="$PROJECT_DIR$/jps-commonjs/src/DSMySQLAdapter.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/DSMySQLAdapter.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/DSMySQLAdapter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/Gruntfile.js" afterPath="$PROJECT_DIR$/jps-commonjs/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/app.js" afterPath="$PROJECT_DIR$/jps-commonjs/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/jps-rest.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/jps-rest.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/jps-rest.min.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/jps-rest.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee" afterPath="$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/dist/jps-cms.js" afterPath="$PROJECT_DIR$/jps-commonjs/dist/jps-cms.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-commonjs/test/jps-cms_test.js" afterPath="$PROJECT_DIR$/jps-commonjs/test/jps-cms_test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jps-jquery/.idea/workspace.xml" afterPath="$PROJECT_DIR$/jps-jquery/.idea/workspace.xml" />
     </list>
     <ignored path="learning-yeoman-ch7.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,8 +72,8 @@
       <file leaf-file-name="jps-cms.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5423729" vertical-offset="0" max-vertical-offset="885">
-              <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.5254237" vertical-offset="0" max-vertical-offset="885">
+              <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -666,8 +660,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jps-commonjs/src/jps-cms.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5423729" vertical-offset="0" max-vertical-offset="885">
-          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.5254237" vertical-offset="0" max-vertical-offset="885">
+          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
           <folding />
         </state>
       </provider>

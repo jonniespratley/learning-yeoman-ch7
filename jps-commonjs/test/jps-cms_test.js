@@ -28,7 +28,7 @@ exports['cms'] = {
 
 		_cms = new cms( {
 			adapter: 'http',
-			endpoint: 'localhost'
+			endpoint: 'localhost:8181/api'
 		} );
 
 		expected = {_id: 1, title: 'Updated post'};

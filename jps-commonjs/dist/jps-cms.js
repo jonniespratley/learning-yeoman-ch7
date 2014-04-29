@@ -1,10 +1,9 @@
 
 /*
-  Client-side CMS CRUD jQuery Plugin
+  Server-side CMS CRUD Plugin
 
   Usage:
-
-  cms = new cms(endpoint: 'http://localhost:8181', adapter: 'http')
+  cms = new cms(endpoint: 'http://localhost:8181/api', adapter: 'http')
   cms.create('posts', title: 'new post')
   cms.update('posts', _id: 1, title: 'updated post')
   cms.destroy('posts', _id: 1)

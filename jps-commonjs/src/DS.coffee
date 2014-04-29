@@ -32,7 +32,6 @@ class exports.DS
 		return
 
 	findOne: (col, id) ->
-		#@call('findOne', col, id)
 		"findOne #{col} #{id}"
 	findAll: (col) ->
 		"findAll #{col}"
