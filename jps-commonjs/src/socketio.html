@@ -1,172 +1,247 @@
 <!DOCTYPE html>
 <html ng-app="jpsCommonjs">
-<head lang="en">
-	<meta charset="UTF-8">
-	<title>Socket.io</title>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>Socket.io</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+		<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular.min.js"></script>
+		<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-route.min.js"></script>
+		<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-resource.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var app = angular.module('jpsCommonjs', []);
 
+			app.controller('MainCtrl', function($scope) {
+				$scope.name = 'Socket.io Tester';
 
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular.min.js"></script>
-	<script type="text/javascript"
-			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-route.min.js"></script>
-	<script type="text/javascript"
-			src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.3/angular-resource.min.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
+				$scope.App = {
+					logs : [],
+					messages : [],
+					socket : null,
+					defaults : {
+						socketServer : '',
+						debug : false,
+						input : '',
+						output : ''
+					},
+					/**
+					 * Handle initializing socket.io
+					 */
+					init : function(options) {
+						var self = this;
+						this.options = $.extend(this.defaults, options);
+						this.socket = io.connect(this.options.socketServer);
+						this.socket.on('connect', function() {
+							console.log('Connected to socket.io');
+						});
+						this.socket.on('msg', function(data) {
+							self.onMessage(data);
+						});
 
-		var app = angular.module('jpsCommonjs', []);
+						console.log('App.init', options);
+					},
+					/**
+					 * Handle the response from the server.
+					 */
+					onMessage : function(data) {
+						var self = this;
+						self.log(data);
+						self.addMessage(data);
+						console.log('socket.io -> sent', data);
+					},
+					/**
+					 * Handle sending a message to socket.io server.
+					 * @param data
+					 */
+					send : function(data) {
+						var self = this;
+						self.input = '';
+						console.log('sent -> socket.io ', data);
+						self.socket.emit('msgEvent', data, function(response) {
+							response.from = 'server';
+							self.onMessage(response);
+						});
+					},
+					/**
+					 * Handle logging the messages.
+					 * @param what
+					 */
+					log : function(what) {
+						var self = this;
+						$scope.$apply(function() {
+							self.logs.push(what)
+						});
+					},
+					addMessage : function(what) {
+						var self = this;
+						$scope.$apply(function() {
+							self.messages.push(what);
+						});
+					},
+					clear : function() {
+						var self = this;
 
-		app.controller('MainCtrl', function ($scope) {
-			$scope.name = 'Socket.io Tester';
+						self.messages = [];
+						self.logs = [];
 
-			$scope.App = {
-				logs: [],
-				messages: [],
-				socket: null,
-				defaults: {
-					socketServer: '',
-					debug: false,
-					input: '',
-					output: ''
-				},
-				/**
-				 * Handle initializing socket.io
-				 */
-				init: function (options) {
-					var self = this;
-					this.options = $.extend(this.defaults, options);
-					this.socket = io.connect(this.options.socketServer);
-					this.socket.on('connect', function () {
-						console.log('Connected to socket.io');
-					});
-					this.socket.on('msg', function (data) {
-						self.onMessage(data);
-					});
+					}
+				};
 
-					console.log('App.init', options);
-				},
-				/**
-				 * Handle the response from the server.
-				 */
-				onMessage: function (data) {
-					var self = this;
-					self.log(data);
-					self.addMessage(data);
-					console.log('socket.io -> sent', data);
-				},
-				/**
-				 * Handle sending a message to socket.io server.
-				 * @param data
-				 */
-				send: function (data) {
-					var self = this;
-					self.input = '';
-					console.log('sent -> socket.io ', data);
-					self.socket.emit('msgEvent', data, function (response) {
-						response.from = 'server';
-						self.onMessage(response);
-					});
-				},
+				$scope.App.init({
+					socketServer : '/',
+					input : '#input',
+					output : '#output'
+				});
 
-				/**
-				 * Handle logging the messages.
-				 * @param what
-				 */
-				log: function (what) {
-					var self = this;
-					$scope.$apply(function () {
-						self.logs.push(what)
-					});
-				},
-				addMessage: function (what) {
-					var self = this;
-					$scope.$apply(function () {
-						self.messages.push(what);
-					});
-				},
-				clear: function () {
-					var self = this;
-
-					self.messages = [];
-					self.logs = [];
-
-				}
-			};
-
-			$scope.App.init({
-				socketServer: '/',
-				input: '#input',
-				output: '#output'
+				window.App = $scope.App;
 			});
 
-			window.App = $scope.App;
-		});
 
-	</script>
-
-</head>
-<body ng-controller="MainCtrl">
-<div class="container">
-	<div class="navbar navbar-default">
+$(function () {
+    $(document).ready(function() {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+    
+        var chart;
+        $('#container').highcharts({
+            chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function() {
+                            var x = (new Date()).getTime(), // current time
+                                y = Math.random();
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                }
+            },
+            title: {
+                text: 'Live random data'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'Value'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Random data',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+    
+                    for (i = -19; i <= 0; i++) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: Math.random()
+                        });
+                    }
+                    return data;
+                })()
+            }]
+        });
+    });
+    
+});
+		</script>
+	</head>
+	<body ng-controller="MainCtrl">
 		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-						class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<a href="#" class="navbar-brand">Socket.io Tester</a>
+			<div class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+							class="icon-bar"></span><span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">Socket.io Tester</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="#">Home</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="#">Home</a>
-					</li>
-				</ul>
+			<div class="input-group">
+				<input type="text" class="form-control" name="input" id="input" ng-model="App.input" />
+				<a class="input-group-addon btn btn-primary" ng-click="App.send(App.input)">Send</a>
+			</div>
+			
+			<br/>
+			
+			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<b> Output</b>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Client</th>
+									<th>Message</th>
+									<th>Time</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in App.messages">
+									<td>{{item.id}}</td>
+									<td>{{item.message}}</td>
+									<td>{{item.datetime | date:'mediumTime'}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer clearfix">
+					<a class="btn pull-right btn-default clear" ng-click="App.clear()">Clear</a>
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="input-group">
-		<input type="text" class="form-control" name="input" id="input" ng-model="App.input" />
-		<a class="input-group-addon btn btn-primary" ng-click="App.send(App.input)">Send</a>
-	</div>
-	<br/>
-
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<b> Output</b>
-		</div>
-		<div class="panel-body">
-			<div class="table-responsive">
-				<table class="table table-condensed">
-					<thead>
-					<tr>
-						<th>Client</th>
-						<th>Message</th>
-						<th>Time</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr ng-repeat="item in App.messages">
-						<td>{{item.id}}</td>
-						<td>{{item.message}}</td>
-
-						<td>{{item.datetime | date:'mediumTime'}}</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="panel-footer clearfix">
-			<a class="btn pull-right btn-default clear" ng-click="App.clear()">Clear</a>
-		</div>
-	</div>
-
-</div>
-</body>
+	</body>
 </html>

@@ -105,20 +105,21 @@ io.sockets.on('connection', function(socket) {
 	});
 	//Setup auto push after interval
 	var delayedSocketPush = delay(function(msg) {
-		var x = (new Date()).getTime(), // current time
-		y = Math.random();
-		msg.data = {
-			x: x,
-			y: y
-		};
-		
+
 		socket.emit('msg', {
 			datetime : new Date(),
 			message : msg,
 			id : 'Server'
 		});
 	}, 5000);
-	var resultPromise = delayedSocketPush('Here is some streaming data....');
+	var x = (new Date()).getTime(), // current time
+	y = Math.random();
+	var chart = {
+		x : x,
+		y : y
+	};
+
+	var resultPromise = delayedSocketPush(chart);
 
 	resultPromise(function(value) {
 
