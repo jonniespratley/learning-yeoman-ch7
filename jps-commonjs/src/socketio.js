@@ -1,14 +1,13 @@
-var http = require('http'),
-	fs = require('fs');
+var http = require('http'), fs = require('fs');
 
 //Simple server push implementation
 var deferred = require('deferred');
 
-var delay = function (fn, timeout) {
-	return function () {
+var delay = function(fn, timeout) {
+	return function() {
 		var def = deferred(), self = this, args = arguments;
 
-		setInterval(function () {
+		setInterval(function() {
 			var value;
 			try {
 				value = fn.apply(self, args);
@@ -18,33 +17,26 @@ var delay = function (fn, timeout) {
 			}
 			def.resolve(value);
 		}, timeout);
-
 		return def.promise;
 	};
 };
-
-
 /**
  * Simple http client server
  */
 var socketFile = fs.readFileSync(__dirname + '/socketio.html');
 var server = http.createServer();
-server.on('request', function (req, res) {
+server.on('request', function(req, res) {
 	res.writeHead('200', {
-		'content-type': 'text/html'
+		'content-type' : 'text/html'
 	});
 	return res.end(socketFile);
 });
-
 var host = process.env.IP | 'localhost';
 var port = process.env.PORT | 9000;
 
 server.listen(port, host);
 
 console.log('Started server at ' + host + ':' + port);
-
-
-
 
 /**
  * Simple socket.io server
@@ -53,92 +45,82 @@ console.log('Started server at ' + host + ':' + port);
 var io = require('socket.io').listen(server);
 var clients = [];
 
-
 var Socket = {
-	clients: [],
-	messages: [],
-	debug: true,
-	connect: function(){
+	clients : [],
+	messages : [],
+	debug : true,
+	connect : function() {
 
 	},
-	send: function(channel, data){
+	send : function(channel, data) {
 
 	},
-	set: function(name, value){
+	set : function(name, value) {
 
 	},
-	get: function(name){
+	get : function(name) {
 
 	}
 };
 
-
-
-
-
-io.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function(socket) {
 	console.log('Client connected');
-
 
 	clients.push(socket);
 
-	io.sockets.emit('this', { will: 'be received by everyone'});
+	io.sockets.emit('this', {
+		will : 'be received by everyone'
+	});
 
-	socket.on('disconnect', function () {
+	socket.on('disconnect', function() {
 		io.sockets.emit('user disconnected');
 	});
 
-
 	socket.emit('msg', {
-		datetime: new Date(),
-		id: socket.id,
-		message: "Welcome " + socket.id + " your the #" + clients.length + " socket."
+		datetime : new Date(),
+		id : socket.id,
+		message : "Welcome " + socket.id + " your the #" + clients.length + " socket."
 	});
 
 	//Send custom event to client
-	socket.on('msgEvent', function (data, fn) {
+	socket.on('msgEvent', function(data, fn) {
 		console.log('Client message', data);
 		fn({
-			id: socket.id,
-			datetime: new Date(),
-			message: data
+			id : socket.id,
+			datetime : new Date(),
+			message : data
 		});
 	});
 
-	socket.on('set nickname', function (name) {
-		socket.set('nickname', name, function () {
+	socket.on('set nickname', function(name) {
+		socket.set('nickname', name, function() {
 			socket.emit('ready');
 		});
 	});
 
-	socket.on('msg', function () {
-		socket.get('nickname', function (err, name) {
+	socket.on('msg', function() {
+		socket.get('nickname', function(err, name) {
 			console.log('Chat message by ', name);
 		});
 	});
-
-
-
-
-
-
-
 	//Setup auto push after interval
-	var delayedSocketPush = delay(function (msg) {
+	var delayedSocketPush = delay(function(msg) {
+		var x = (new Date()).getTime(), // current time
+		y = Math.random();
+		msg.data = {
+			x: x,
+			y: y
+		};
+		
 		socket.emit('msg', {
-			datetime: new Date(),
-			message: msg,
-			id: 'Server'
+			datetime : new Date(),
+			message : msg,
+			id : 'Server'
 		});
 	}, 5000);
-
-
 	var resultPromise = delayedSocketPush('Here is some streaming data....');
 
-	resultPromise(function (value) {
+	resultPromise(function(value) {
 
 	});
-
-
 });
-

@@ -6,7 +6,7 @@ var app = new core({
 	name: 'My App',
 	extension: require('./dist/module-extension').extension
 });
-
+app.init();
 
 //Listen for init event
 app.on('init', function (instance) {
@@ -24,7 +24,7 @@ app.save({id: null, title: 'Test Title'});
 app.update({id: 1, title: 'Updated Title'});
 app.read({id: 1});
 app.destroy({id: 1});
-app.init();
+
 
 /****
  *
