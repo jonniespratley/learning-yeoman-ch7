@@ -120,7 +120,11 @@
 						var self = this;
 						this.options = $.extend(this.defaults, options);
 						this.socket = io.connect(this.options.socketServer);
-						this.socket.on('connect', function() {
+						this.socket.on('connect', function(client) {
+							
+							
+							angular.element('#msg').prepend('<div class="alert alert-info">Welcome client '+ this.socket.sessionid + '</div>');
+							console.log(client, this);
 							console.log('Connected to socket.io');
 						});
 						this.socket.on('msg', function(data) {
@@ -208,6 +212,7 @@
 					</div>
 				</div>
 			</div>
+			<div id="msg"></div>
 			<div class="input-group">
 				<input type="text" class="form-control" name="input" id="input" ng-model="App.input" />
 				<a class="input-group-addon btn btn-primary" ng-click="App.send(App.input)">Send</a>
