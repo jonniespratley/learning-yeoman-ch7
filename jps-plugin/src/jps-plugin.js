@@ -1,7 +1,6 @@
 /*
  * jps plugin
- *
- *
+ * This jQuery plugin provides simple methods for sending CRUD operations to a API.
  * Copyright (c) 2014 Jonnie Spratley
  * Licensed under the MIT license.
  */
