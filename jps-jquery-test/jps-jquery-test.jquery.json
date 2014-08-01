@@ -1,0 +1,28 @@
+{
+  "name": "jps-jquery-test",
+  "title": "Awesome jQuery plugin",
+  "description": "The best jQuery plugin ever.",
+  "version": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "url": "https://github.com/jonniespratley"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~2.x"
+  },
+  "keywords": [
+    "jquery-plugin"
+  ]
+}
