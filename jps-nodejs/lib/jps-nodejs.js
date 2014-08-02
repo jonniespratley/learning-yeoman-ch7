@@ -9,5 +9,25 @@
 'use strict';
 
 exports.awesome = function() {
-  return 'awesome';
+    return 'awesome';
 };
+
+grunt.initConfig({
+    concat: {
+        options: {},
+        foo: {},
+        bar: {
+            options: {}
+        }
+    }
+});
+grunt.initConfig({
+    myTask: {
+        staticFiles: {
+            files: [{
+                src: 'src/myfile.js',
+                dest: 'build/myfile.min.js'
+            }]
+        }
+    }
+});
