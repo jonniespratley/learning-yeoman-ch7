@@ -1,19 +1,19 @@
 {
-  "name": "jps-jquery",
+  "name": "jps-plugin",
   "version": "0.0.1",
   "description": "Awesome jQuery plugin",
   "keywords": [
     "jquery-plugin"
   ],
-  "homepage": "https://github.com/jonniespratley/jps-jquery",
+  "homepage": "https://github.com/jonniespratley/jps-plugin",
   "author": {
-    "name": "jonnie spratley",
-    "email": "",
+    "name": "Jonnie Spratley",
+    "email": "jonniespratley@gmail.com",
     "url": "https://github.com/jonniespratley"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonniespratley/jps-jquery.git"
+    "url": "https://github.com/jonniespratley/jps-plugin.git"
   },
   "licenses": [
     {
